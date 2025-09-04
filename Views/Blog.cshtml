@@ -1,0 +1,130 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Blog>
+@using Umbraco.Cms.Core.PublishedCache;
+@inject ITagQuery _tagQuery;
+
+@{
+    Layout = "ChildPage.cshtml";
+
+    var blogs = Model.Children<ContentModels.BlogEntry>()
+                     .OrderByDescending(x => x.CreateDate)
+                     .ToList();
+
+    var allContentTags = _tagQuery.GetAllContentTags()
+                                  .OrderBy(t => t.Text)
+                                  .ToList();
+}
+
+<section id="blog" class="bg-grey">
+  <div class="container">
+    <div class="section-content">
+      <div class="title-wrap mb-3">
+        <h2 class="section-title">Blog</h2>
+      </div>
+
+      <div class="mb-4">
+        <h6 class="mb-2">Tags</h6>
+        <span class="clickable" onclick="clearSelections()">Everything</span>
+        @foreach (var tag in allContentTags)
+        {
+            var p = "'" + tag.Text + "'";
+            <span class="clickable" onclick="toggleBlogItems(@p)">@tag.Text</span>
+        }
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 blog-holder">
+          <div class="row">
+            @foreach (var item in blogs)
+            {
+                var author = item.Value<string>("author");
+                author = string.IsNullOrWhiteSpace(author) ? "Anonymous" : author;
+
+                var catsDisplay = (item.Categories != null && item.Categories.Any())
+                    ? String.Join(" | ", item.Categories)
+                    : "Uncategorized";
+
+                var catsAttr = (item.Categories != null && item.Categories.Any())
+                    ? String.Join(" ", item.Categories)
+                    : "";
+
+                <div class="col-md-4 blog-item-wrapper">
+                  <div class="blog-item">
+                    <div class="blog-img">
+                      <a href="@item.Url()">
+                        @if (item.Image != null)
+                        {
+                            var mediaCrop = Url.GetCropUrl(item.Image, "BlogThumbnail");
+                            <img src="@mediaCrop" alt="@item.Name" loading="lazy" />
+                        }
+                        else
+                        {
+                            <img src="https://placehold.co/400x250" alt="@item.Name" loading="lazy" />
+                        }
+                      </a>
+                    </div>
+
+                    <div class="blog-text">
+                      <div class="blog-tag">
+                        <h6>
+                          <small data-cats="@catsAttr">@catsDisplay</small>
+                        </h6>
+                      </div>
+
+                      <div class="blog-title">
+                        <a href="@item.Url()"><h4>@item.Name</h4></a>
+                      </div>
+
+                      <div class="blog-meta">
+                        <p class="blog-date">@item.CreateDate.ToString("MMMM dd, yyyy")</p>
+                      </div>
+
+                      <div class="blog-desc">
+                        <p>@item.Summary</p>
+                      </div>
+
+                      <div class="blog-author">
+                        <p>by @author</p>
+                      </div>
+
+                      <div class="blog-share-wrapper">
+                        <a class="blog-share" href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a>
+                        <a class="blog-share" href="https://www.twitter.com/"><i class="fab fa-twitter-square"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .clickable { cursor: pointer; margin-right: .5rem; display: inline-block; }
+</style>
+<script>
+  function toggleBlogItems(tag) {
+    var wrappers = document.querySelectorAll('.blog-item-wrapper');
+    wrappers.forEach(function (wrap) {
+      var catsEl = wrap.querySelector('[data-cats]');
+      var cats = (catsEl && catsEl.dataset.cats ? catsEl.dataset.cats : '')
+                   .toLowerCase()
+                   .split(' ')
+                   .filter(Boolean);
+      if (cats.includes(String(tag).toLowerCase())) {
+        wrap.style.display = '';
+      } else {
+        wrap.style.display = 'none';
+      }
+    });
+  }
+  function clearSelections() {
+    document.querySelectorAll('.blog-item-wrapper').forEach(function (w) {
+      w.style.display = '';
+    });
+  }
+</script>

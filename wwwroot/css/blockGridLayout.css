@@ -1,0 +1,25 @@
+.umb-block-grid__layout-container {
+  --umb-block-grid--grid-columns: 12;
+  column-gap: 24px;
+  row-gap: 24px;
+}
+
+@media (min-width: 1024px) {
+  .umb-block-grid__layout-item[data-content-element-type-alias="headlineBlock"] { --umb-block-grid--item-column-span: 12; }
+  .umb-block-grid__layout-item[data-content-element-type-alias="imageBlock"],
+  .umb-block-grid__layout-item[data-content-element-type-alias="richTextBlock"] { --umb-block-grid--item-column-span: 6; }
+}
+
+.product-image-block {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #f7d6df; 
+}
+.product-image-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

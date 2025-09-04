@@ -1,0 +1,35 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    var title = Model.Value<string>("headerTitle");
+    if (string.IsNullOrWhiteSpace(title))
+    {
+        title = Model.Name;
+    }
+
+    var bgUrl = Model.Value<IPublishedContent>("backgroundImage")?.Url();
+
+    var textColor = Model.Value<string>("headerTextColor");
+    if (string.IsNullOrWhiteSpace(textColor))
+    {
+        textColor = "#fff";
+    }
+}
+
+@if (!string.IsNullOrWhiteSpace(bgUrl))
+{
+  <div class="jumbotron jumbotron-small jumbotron-single d-flex align-items-center"
+       style="background-image:url(@bgUrl); color:@textColor;">
+    <div class="container text-center">
+      <h1 class="display-2 mb-4">@title</h1>
+    </div>
+  </div>
+}
+else
+{
+  <div class="jumbotron jumbotron-small jumbotron-single d-flex align-items-center"
+       style="color:@textColor;">
+    <div class="container text-center">
+      <h1 class="display-2 mb-4">@title</h1>
+    </div>
+  </div>
+}

@@ -2,177 +2,184 @@
 
 This project was created as part of the **Umbraco Fundamentals Team Training** course to explore and practice the core concepts of Umbraco CMS development.
 
-## ?? Project Overview
+## 🎯 Project Purpose
 
-This is a training website built with **Umbraco CMS v16.1.1** running on **.NET 9.0**. The project demonstrates the fundamental concepts and best practices of Umbraco development including:
+This training project demonstrates practical implementation of Umbraco CMS fundamentals, including:
 
-- Document types and content structure
-- Template development with Razor views
-- Media handling and management
-- Content management and organization
-- Front-end integration with CSS and JavaScript
-- Umbraco backoffice configuration
+- **Document Types**: Creating and configuring custom content types
+- **Templates**: Developing Razor templates for content rendering
+- **Content Structure**: Building hierarchical content architecture
+- **Media Handling**: Managing and displaying media files
+- **Block Grid & Block List**: Implementing flexible content blocks
+- **Multilingual Support**: (If applicable based on training content)
+- **Views and Partials**: Creating reusable view components
 
-## ?? Learning Objectives
+## 🛠️ Technology Stack
 
-Through this project, I have explored and implemented:
-
-- **Document Types**: Creating and configuring content types
-- **Templates**: Building responsive layouts using Razor syntax
-- **Content Structure**: Organizing content hierarchies
-- **Media Management**: Handling images and media assets
-- **Properties and Data Types**: Working with various field types
-- **Multilingual Support**: Understanding localization concepts
-- **Frontend Development**: Styling with CSS and Bootstrap
-- **JavaScript Integration**: Adding interactive elements
-
-## ??? Technical Stack
-
+- **Framework**: ASP.NET Core 9.0
 - **CMS**: Umbraco CMS 16.1.1
-- **Framework**: .NET 9.0
 - **Database**: SQLite (for development)
-- **Frontend**: HTML5, CSS3, JavaScript, Bootstrap 5
-- **Icons**: Font Awesome, Linearicons
-- **Carousel**: Owl Carousel
-- **Lightbox**: Lightcase
+- **Frontend**: HTML, CSS, JavaScript
+- **Templating**: Razor Views
 
-## ?? Getting Started
+## 📁 Project Structure
+
+```
+MyProject/
+├── Views/                          # Razor templates and views
+│   ├── master.cshtml              # Main layout template
+│   ├── HomePage.cshtml            # Home page template
+│   ├── Blog.cshtml                # Blog listing template
+│   ├── BlogEntry.cshtml           # Individual blog post template
+│   ├── Product.cshtml             # Product page template
+│   ├── Shop.cshtml                # Shop listing template
+│   ├── TextPage.cshtml            # Generic text page template
+│   └── Partials/                  # Reusable partial views
+│       ├── Header.cshtml          # Header component
+│       ├── blockgrid/             # Block Grid components
+│       └── blocklist/             # Block List components
+├── wwwroot/                       # Static web assets
+│   ├── css/                       # Stylesheets
+│   ├── scripts/                   # JavaScript files
+│   └── media/                     # Uploaded media files
+├── docs/                          # Project documentation and screenshots
+├── appsettings.json              # Application configuration
+├── appsettings.Development.json  # Development-specific settings
+└── Program.cs                    # Application entry point
+```
+
+## 🎨 Features Implemented
+
+### Content Types & Templates
+- **HomePage**: Main landing page with flexible content blocks
+- **Blog**: Blog listing and individual blog entry pages
+- **Product**: Product showcase pages
+- **Shop**: E-commerce style product listings
+- **TextPage**: Generic content pages
+
+### Block Components
+- **HeadlineBlock**: Configurable headline components
+- **ImageBlock**: Image display components
+- **RichTextBlock**: Rich text content areas
+
+### Styling & Assets
+- Custom CSS for layout and block grid styling
+- Responsive design considerations
+- Media management and optimization
+
+## 📸 Project Screenshots
+
+The following screenshots showcase the key features and functionality developed during the training:
+
+![Screenshot 1](docs/Screenshot%201.png)
+*Main interface and content structure*
+
+![Screenshot 2](docs/Screenshot%202.png)
+*Document types and content modeling*
+
+![Screenshot 3](docs/Screenshot%203.png)
+*Template development and customization*
+
+![Screenshot 4](docs/Screenshot%204.png)
+*Media handling and block components*
+
+![Screenshot 5](docs/Screenshot%205.png)
+*Content management and publishing*
+
+![Screenshot 6](docs/Screenshot%206.png)
+*Frontend rendering and user experience*
+
+## 🚀 Getting Started
 
 ### Prerequisites
-
 - .NET 9.0 SDK
 - Visual Studio 2022 or VS Code
-- SQL Server Express or SQLite (included)
+- Basic knowledge of ASP.NET Core and Razor syntax
 
-### Installation
+### Installation & Setup
 
-1. Clone the repository:
+1. **Clone the repository**
    ```bash
    git clone https://github.com/AmjadRenno/umbraco-fundamentals-training.git
    cd umbraco-fundamentals-training
    ```
 
-2. Restore NuGet packages:
+2. **Restore NuGet packages**
    ```bash
    dotnet restore
    ```
 
-3. Run the project:
+3. **Run the application**
    ```bash
    dotnet run
    ```
 
-4. Navigate to `https://localhost:5001` or `http://localhost:5000`
+4. **Access the application**
+   - Frontend: `https://localhost:5001` or `http://localhost:5000`
+   - Umbraco Backoffice: `https://localhost:5001/umbraco`
 
-5. Access the Umbraco backoffice at `/umbraco`
+### First Run Setup
+On first run, Umbraco will guide you through the initial setup process where you can:
+- Create an admin user account
+- Configure the database connection
+- Install starter templates (optional)
 
-## ?? Project Screenshots
+## 📚 Training Outcomes
 
-### Home Page
-![Home Page Screenshot](docs/Screenshot%201.png)
-*The main landing page showcasing course offerings and testimonials*
+Through this project, I have gained hands-on experience with:
 
-### Course Features Section
-![Course Features](docs/Screenshot%202.png)
-*Interactive course cards displaying different Umbraco training modules*
+✅ **Umbraco Backoffice Navigation**
+- Content management interface
+- Media library management
+- User and permission management
 
-### Testimonials and Partners
-![Testimonials Section](docs/Screenshot%203.png)
-*Customer testimonials and partner logos carousel*
+✅ **Document Type Creation**
+- Defining custom content structures
+- Setting up property editors
+- Configuring composition and inheritance
 
-### Responsive Design
-![Mobile View](docs/Screenshot%204.png)
-*Mobile-responsive layout demonstration*
+✅ **Template Development**
+- Creating Razor templates
+- Implementing master layouts
+- Working with partial views
 
-### Umbraco Backoffice
-![Umbraco Backend](docs/Screenshot%205.png)
-*Content management interface in Umbraco backoffice*
+✅ **Content Architecture**
+- Building logical content hierarchies
+- Understanding content relationships
+- Managing multilingual content (if applicable)
 
-### Content Structure
-![Content Tree](docs/Screenshot%206.png)
-*Document types and content organization*
+✅ **Block-based Content**
+- Implementing Block Grid layouts
+- Creating Block List components
+- Building reusable content blocks
 
-## ?? Project Structure
+✅ **Media Management**
+- Organizing media assets
+- Implementing responsive images
+- Optimizing media delivery
 
-```
-MyProject/
-??? Views/                     # Razor templates
-?   ??? master.cshtml         # Master layout template
-?   ??? HomePage.cshtml       # Home page template
-?   ??? _ViewImports.cshtml   # View imports
-??? wwwroot/                  # Static files
-?   ??? css/                  # Stylesheets
-?   ??? scripts/              # JavaScript files
-?   ??? images/               # Image assets
-??? umbraco/                  # Umbraco system files
-?   ??? Data/                 # Database and temp files
-?   ??? Logs/                 # Application logs
-??? docs/                     # Documentation screenshots
-??? appsettings.json          # Configuration settings
-??? Program.cs                # Application entry point
-??? MyProject.csproj          # Project file
-```
+## 🔧 Configuration Notes
 
-## ?? Features Implemented
+### Database Configuration
+- Development uses SQLite for simplicity
+- Connection string configured in `appsettings.json`
+- Database file location: `App_Data/umbraco.sqlite.db`
 
-### Content Management
-- **HomePage Document Type**: Main landing page with customizable content
-- **Color Settings**: Dynamic color theming system
-- **Media Picker**: Image selection and management
-- **Rich Text Editor**: Content editing capabilities
+### Security Considerations
+- Concurrent logins disabled for training environment
+- Debug mode enabled in development settings
+- TinyMCE content sanitization enabled
 
-### Frontend Components
-- **Responsive Navigation**: Mobile-friendly menu system
-- **Hero Section**: Dynamic jumbotron with custom text
-- **Course Cards**: Interactive service/course listings
-- **Testimonials Carousel**: Customer feedback slider
-- **Partner Logos**: Company logo showcase
-- **Contact Section**: About section with personal information
+## 🤝 Training Completion
 
-### Styling and UX
-- **Bootstrap 5**: Responsive grid system
-- **Custom CSS**: Brand-specific styling
-- **Font Integration**: Google Fonts (Lato, Work Sans)
-- **Icon Libraries**: Font Awesome and Linearicons
-- **Hover Effects**: Interactive elements
-- **Gradient Backgrounds**: Custom color schemes
+This project represents successful completion of the **Umbraco Fundamentals Team Training** course, demonstrating practical application of core Umbraco CMS concepts and development practices.
 
-## ?? Key Learning Outcomes
+## 📄 License
 
-1. **Umbraco Fundamentals**: Understanding the CMS architecture
-2. **Content Modeling**: Creating efficient document type structures
-3. **Template Development**: Building responsive, maintainable views
-4. **Media Management**: Handling assets and image optimization
-5. **Configuration**: Working with appsettings and Umbraco configuration
-6. **Best Practices**: Following Umbraco development conventions
-7. **Frontend Integration**: Combining modern web technologies with Umbraco
-
-## ?? Development Notes
-
-- Uses SQLite for development database (easily portable)
-- Configured for unattended upgrades
-- Implements content versioning cleanup
-- Includes comprehensive error handling
-- Follows Umbraco security best practices
-
-## ?? Training Completion
-
-This project demonstrates completion of the Umbraco Fundamentals training course, covering all essential aspects of Umbraco CMS development from basic setup to advanced content management features.
-
-## ?? Contributing
-
-This is a training project, but feel free to explore the code and provide feedback or suggestions for improvements.
-
-## ?? License
-
-This project is created for educational purposes as part of Umbraco training.
-
-## ?? Acknowledgments
-
-- Umbraco HQ for providing excellent training materials
-- The Umbraco community for continuous support and resources
-- Training instructors for guidance throughout the learning process
+This project is for educational and training purposes only.
 
 ---
 
-**Note**: This project was created as part of the Umbraco Fundamentals Team Training course to demonstrate proficiency in Umbraco CMS development.
+**Training Completed By**: Amjad Renno  
+**Course**: Umbraco Fundamentals Team Training  
+**Repository**: [umbraco-fundamentals-training](https://github.com/AmjadRenno/umbraco-fundamentals-training)
