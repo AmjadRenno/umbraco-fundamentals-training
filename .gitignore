@@ -480,3 +480,15 @@ umbraco-package-schema.json
 
 # Media files
 /wwwroot/media/
+
+
+
+# Local configs & secrets
+appsettings.json
+appsettings.*.local.json
+
+# Umbraco generated static assets
+/wwwroot/umbraco/
+
+App_Data/
+
