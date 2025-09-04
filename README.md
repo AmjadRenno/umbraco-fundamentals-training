@@ -174,9 +174,21 @@ Through this project, I have gained hands-on experience with:
 
 This project represents successful completion of the **Umbraco Fundamentals Team Training** course, demonstrating practical application of core Umbraco CMS concepts and development practices.
 
+## Attribution & Disclaimer
+
+This repository contains my own code and configuration created while learning Umbraco CMS.
+It does **not** include any paid training materials or proprietary assets from Umbraco A/S.
+
+Umbraco® is a trademark of Umbraco A/S. This project is not affiliated with or endorsed by Umbraco A/S.
+
+All screenshots included are from my local demo environment with non-sensitive data.
+
+
 ## 📄 License
 
 This project is for educational and training purposes only.
+The custom code in this repository is released under the MIT License (see `LICENSE`).
+Third-party dependencies (including Umbraco CMS obtained via NuGet) are covered by their respective licenses and are **not** redistributed here.
 
 ---
 
