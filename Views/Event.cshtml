@@ -1,0 +1,52 @@
+﻿@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = "master.cshtml";
+}
+<section class="container py-4">
+    <h1>@Model.Value("eventTitle")</h1>
+    <p>@Model.Value("eventDescription")</p>
+    <p><strong>Date:</strong> @Model.Value("eventDate")</p>
+
+    <h3 class="mt-4 mb-3">Speakers at event:</h3>
+
+<div class="row">
+@{
+    var speakers = Model.Value<IEnumerable<BlockListItem>>("speakers");
+    if (speakers != null)
+    {
+        foreach (var speaker in speakers)
+        {
+            var content = speaker.Content;
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <h5>@content.Value("firstName") @content.Value("lastName")</h5>
+                    <p class="text-muted">@content.Value("speakerBio")</p>
+                </div>
+            </div>
+        }
+    }
+}
+<h3 class="mt-4 mb-3">Location</h3>
+@{
+    var location = Model.Value<IPublishedContent>("location");
+
+    if (location != null)
+    {
+        <div class="border p-3 rounded">
+            <p><strong>Title:</strong> @location.Value("title")</p>
+            <p><strong>Building:</strong> @location.Value("building")</p>
+            <p><strong>Address:</strong> @location.Value("address")</p>
+            <p><strong>Zip:</strong> @location.Value("zip")</p>
+            <p><strong>City:</strong> @location.Value("city")</p>
+        </div>
+    }
+    else
+    {
+        <p>No location selected for this event.</p>
+    }
+}
+
+</div>
+</section>

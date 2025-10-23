@@ -1,0 +1,41 @@
+﻿@model MyProject.ViewModels.ContactForm
+
+@if (TempData["success"] == null)
+{
+    @using (Html.BeginUmbracoForm<MyProject.Controllers.ContactFormSurfaceController>(nameof(MyProject.Controllers.ContactFormSurfaceController.Submit)))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Your name" })
+            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "you@example.com", type="email" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Subject</label>
+            @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", placeholder = "Subject" })
+            @Html.ValidationMessageFor(m => m.Subject, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Message</label>
+            @Html.TextAreaFor(m => m.Message, 5, 40, new { @class = "form-control", placeholder = "Enter your message..." })
+            @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })
+        </div>
+
+        <button class="btn btn-primary">Send Message</button>
+    }
+}
+else
+{
+    <div class="alert alert-success my-3">
+        Thank you for contacting us. We'll be in touch soon!
+    </div>
+}

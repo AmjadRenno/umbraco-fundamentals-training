@@ -1,4 +1,4 @@
-html, body {
+﻿html, body {
     width: 100%;
     overflow-x: hidden;
 }
@@ -143,13 +143,15 @@ p.review-text {
     top: 0;
     right: 0;
     left: 0;
-    z-index: 11;
+    z-index: 1000; /* زيادة z-index لضمان عدم التداخل مع المحتوى */
     transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 
 .navbar-nav {
     margin-left: auto;
     margin-right: 0;
+    position: relative;
+    z-index: 1002;
 }
 
 .navbar-brand {
@@ -790,6 +792,10 @@ p.review-text {
         text-decoration: none;
     }
 
+.side-nav h6 { 
+    margin: .25rem 0; 
+}
+
 .sidenav a {
     text-decoration: none;
     font-size: 25px;
@@ -1009,6 +1015,14 @@ p.review-text {
 .above {
     z-index: 5;
 }
+
+/*==============================
+=         CARD STYLING         =
+==============================*/
+.card .card-footer { 
+    background: #fafafa; 
+}
+
 /*=====  End of CLIENT  ======*/
 /*==================================
 =            RESPONSIVE            =
@@ -1035,6 +1049,7 @@ p.review-text {
     #header-navbar {
         padding-top: 15px !important;
         padding-bottom: 15px !important;
+
     }
 
     .navbar-transparent .navbar-collapse {
@@ -1058,40 +1073,101 @@ p.review-text {
     }
 }
 
-/*=====  End of RESPONSIVE  ======*/
-.owl-dot.active > span {
-    background-color: transparent;
-}
-
-.clickable {
-    cursor: pointer;
-}
-
-.img-circle {
-    border-radius: 50%;
-}
-
-.product-price-text {
-    color: lightgrey;
-}
-
-.image-component {
-    padding-top: 2rem;
-}
-
-.featured-text {
-    color: #e88a25;
-}
-
-.lang-dropdown {
+/* التأكد من عدم تداخل النماذج مع التنقل */
+.form-control {
     position: relative;
-    display: inline;
-}
-
-.lang-dropdown-content {
-    display: inline;
-    position: relative;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    pointer-events: auto !important; /* التأكد من إمكانية التفاعل */
+}
+
+/* مساحة أعلى كافية للصفحات غير الرئيسية */
+.container.py-4 {
+    position: relative;
+    z-index: 1;
+}
+
+/* إصلاح للصفحات التي تحتوي على نماذج */
+section.container {
+    margin-top: 20px;
+}
+
+/* التأكد من عدم وجود أي عناصر شفافة تحجب النماذج */
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(253, 101, 90, 0.25);
+    pointer-events: auto !important;
+    user-select: text !important;
+}
+
+/* إزالة أي تداخل مع العناصر الأخرى */
+.mb-3 {
+    position: relative;
+    z-index: 2;
+}
+
+.mb-3 label {
+    pointer-events: none; /* منع التسمية من حجب الحقل */
+}
+
+.mb-3 input, .mb-3 textarea {
+    pointer-events: auto !important;
+    user-select: text !important;
+}
+
+/* التأكد من أن النموذج فوق أي عناصر أخرى */
+form {
+    position: relative;
+    z-index: 10;
+}
+
+/* حل جذري لمشكلة النماذج */
+.contact-form * {
+    pointer-events: auto !important;
+}
+
+.contact-form input,
+.contact-form textarea {
+    pointer-events: auto !important;
+    user-select: text !important;
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    position: relative !important;
+    z-index: 99999 !important;
+    background: white !important;
+    border: 2px solid #007bff !important;
+    cursor: text !important;
+    outline: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #0056b3 !important;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25) !important;
+}
+
+/* إزالة أي تداخل من العناصر الأخرى */
+.contact-form {
+    position: relative !important;
+    z-index: 99999 !important;
+    background: white !important;
+    clear: both !important;
+}
+
+/* التأكد من عدم تأثير أي عنصر آخر */
+body * {
+    position: static;
+}
+
+.contact-form,
+.contact-form * {
+    position: relative !important;
+}
+
+/* إزالة أي overlay قد يكون موجود */
+.overlay, .canvas-overlay, .sidenav {
+    display: none !important;
 }
 

@@ -1,9 +1,9 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.TextPage>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 
 @{
     Layout = "ChildPage.cshtml";
+    // لو عندك خاصية في الدكتايب اسمها bodyText:
+    var bodyText = Model.Value<string>("bodyText");
 }
 
 <section id="single-content" class="bg-white">
@@ -11,7 +11,7 @@
         <div class="section-content blog-content">
             <div class="row">
                 <div class="col-md-8 offset-md-2 mt-4">
-                    @Model.BodyText
+                    @Html.Raw(bodyText)
                 </div>
                 <div class="col-md-2 mt-4 align-self-start">
                     <ul class="side-nav">

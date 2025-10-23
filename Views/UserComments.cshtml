@@ -1,0 +1,56 @@
+﻿@{
+    Layout = "master.cshtml"; // أو اسم قالب الماستر لديك بالضبط
+}
+@using Umbraco.Cms.Core.Models.PublishedContent
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+<section class="container py-4">
+    <h1 class="mb-3">User Comments</h1>
+
+    @if (Model.HasValue("introText"))
+    {
+        <p class="lead mb-4">@Model.Value("introText")</p>
+    }
+
+    @{
+        var contactPage = Model
+            .AncestorsOrSelf().Last()         // الجذر (Home)
+            .Descendants()                     // كل الصفحات تحته
+            .FirstOrDefault(x => x.ContentType.Alias == "contactPage");
+
+        var comments = contactPage == null
+            ? Enumerable.Empty<IPublishedContent>()
+            : contactPage.Children()
+                         .Where(x => x.ContentType.Alias == "comment" && x.IsPublished())
+                         .OrderByDescending(x => x.UpdateDate);
+    }
+
+    @if (!comments.Any())
+    {
+        <div class="alert alert-info">No published comments yet.</div>
+        <p class="text-muted">Tip: بعد إرسال نموذج Contact Us، ادخل الـ Backoffice وانشر عناصر <em>Comment</em> لعرضها هنا.</p>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var c in comments)
+            {
+                <div class="col-12 col-md-10 col-lg-8">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="mb-1">
+                                <strong>@c.Value("username")</strong>
+                                <span class="text-muted">— @c.Value("email")</span>
+                            </div>
+                            <div class="text-muted fst-italic mb-2">@c.Value("subject")</div>
+                            <div>@c.Value("message")</div>
+                        </div>
+                        <div class="card-footer text-muted small">
+                            Updated: @c.UpdateDate.ToString("g")
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</section>

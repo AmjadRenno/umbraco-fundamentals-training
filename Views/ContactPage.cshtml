@@ -1,0 +1,10 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = "master.cshtml";   
+}
+
+<section class="container py-4">
+    @Html.Partial("~/Views/Partials/ContactForm.cshtml",
+    new MyProject.ViewModels.ContactForm())
+</section>

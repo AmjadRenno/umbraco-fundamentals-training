@@ -1,0 +1,46 @@
+﻿@using Umbraco.Cms.Core.Services
+@inject IMemberService MemberService
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+    Layout = "master.cshtml";
+
+    var activeMembers = MemberService.GetMembersByGroup("Active");
+    var prospectMembers = MemberService.GetMembersByGroup("Prospect");
+}
+
+<section class="container py-4">
+    <h1 class="mb-4">Members</h1>
+
+    <h2 class="mb-3 text-primary">Active Members</h2>
+    @foreach (var member in activeMembers)
+    {
+        <div class="border rounded p-3 mb-3 bg-light">
+            <strong>@(member.GetValue("firstname")) @(member.GetValue("lastname"))</strong><br />
+            @member.GetValue("address")<br />
+            @member.GetValue("zip") @member.GetValue("city")<br />
+            Mobile: @member.GetValue("mobile")<br />
+
+            @{
+                // Get photo URL if it exists
+                var memberImage = member.GetValue<string>("photo");
+            }
+
+            @if (!string.IsNullOrEmpty(memberImage))
+            {
+                <img src="@memberImage" alt="@member.Name"
+                     width="150" height="150"
+                     style="border-radius:10px; margin-top:10px;" />
+            }
+        </div>
+    }
+
+    <h2 class="mb-3 text-secondary">Prospects</h2>
+    @foreach (var member in prospectMembers)
+    {
+        <div class="border rounded p-3 mb-3 bg-white">
+            <strong>@(member.GetValue("firstname")) @(member.GetValue("lastname"))</strong><br />
+            Mobile: @member.GetValue("mobile")<br />
+        </div>
+    }
+</section>

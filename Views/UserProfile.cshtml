@@ -1,0 +1,50 @@
+﻿@using Umbraco.Cms.Core.Services
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject IMemberService MemberService
+
+@{
+    Layout = "master.cshtml";
+
+    var isLoggedIn = Context.User?.Identity?.IsAuthenticated ?? false;
+}
+
+<section class="container py-4">
+    @if (isLoggedIn)
+    {
+        var user = Context.User.Identity;
+        var username = user.GetUserName();
+        var member = MemberService.GetByUsername(username);
+
+        var uid = member.Key.ToString();
+        var firstName = member.GetValue("firstname");
+        var lastName = member.GetValue("lastname");
+        var address = member.GetValue("address");
+        var zip = member.GetValue("zip");
+        var city = member.GetValue("city");
+        var mobile = member.GetValue("mobile");
+        var memberImage = member.GetValue<string>("photo");
+
+        <h2>Welcome @firstName @lastName</h2>
+        <p><strong>Username:</strong> @username</p>
+        <p><strong>Member ID:</strong> @uid</p>
+        <p><strong>Address:</strong> @address</p>
+        <p><strong>Zip:</strong> @zip</p>
+        <p><strong>City:</strong> @city</p>
+        <p><strong>Mobile:</strong> @mobile</p>
+
+        @if (!string.IsNullOrEmpty(memberImage))
+        {
+            <img src="@memberImage" alt="Profile Photo" style="max-width:200px;border-radius:10px;margin-top:10px;" />
+        }
+        else
+        {
+            <p>No photo uploaded.</p>
+        }
+    }
+    else
+    {
+        <p class="text-warning">You are not logged in.</p>
+        <a href="/login" class="btn btn-primary">Go to Login Page</a>
+    }
+</section>

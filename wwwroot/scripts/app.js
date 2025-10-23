@@ -1,11 +1,48 @@
 ! function(n, t, e) {
     var o = {
         init: function(e) {
+            o.fixForms(); // ????? ????? ???????
             o.select2(), o.stellar(), o.carousel(), o.portfolio(), o.lightCase(), o.sideNav(), o.counter(), o.skills(), o.aos(), o.navbarChange();
+        },
+        // ???? ???? ?????? ???????
+        fixForms: function() {
+            n(e).ready(function() {
+                // ????? ?? ??????? ?? ???? ???????
+                n('.contact-form input, .contact-form textarea').each(function() {
+                    var element = n(this)[0];
+                    if (element) {
+                        // ????? ???? ??????? ???????
+                        element.onmousedown = null;
+                        element.onmouseup = null;
+                        element.onclick = null;
+                        element.onfocus = null;
+                        element.onblur = null;
+                        element.onkeydown = null;
+                        element.onkeyup = null;
+                        element.onkeypress = null;
+                        
+                        // ???? ??????? ???????
+                        element.disabled = false;
+                        element.readOnly = false;
+                        element.style.pointerEvents = 'auto';
+                        element.style.userSelect = 'text';
+                        element.style.cursor = 'text';
+                        element.style.zIndex = '99999';
+                        element.style.position = 'relative';
+                        element.style.background = 'white';
+                    }
+                });
+                
+                // ????? ??????? ????? ???????
+                n('.contact-form input, .contact-form textarea').on('click touchstart', function() {
+                    n(this).focus();
+                });
+            });
         },
         select2: function() {
             n(e).ready(function() {
-                n("select").select2();
+                // ???? ????? select2 ??? ???? ???????
+                n("select:not(.contact-form select)").select2();
             });
         },
         stellar: function() {
@@ -141,49 +178,3 @@
         o.init(n);
     });
 }(window.jQuery, window, document);
-
-function clearSelections(){
-     let targets = document.querySelectorAll('[data-cats]');
-    for (let index = 0; index < targets.length; ++index) {
-        let x = targets[index].parentElement.parentElement.parentElement.parentElement.parentElement;
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        }
-    }
-}
-
-function langDropdown() {
-  var x = document.getElementById("langDropdown");
-  if (x.style.visibility === "hidden") {
-    x.style.visibility = "visible";
-  } else {
-    x.style.visibility = "hidden";
-  }
-}
-
-function toggleBlogItems(category) {
-    console.log("blog item toggle for " + category);
-    let targets = document.querySelectorAll('[data-cats]');
-    for (let index = 0; index < targets.length; ++index) {
-        let x = targets[index].parentElement.parentElement.parentElement.parentElement.parentElement;
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        }
-    }
-    let newTargets = [];
-    for (let index = 0; index < targets.length; ++index) {
-        const element = targets[index];
-        if (element.innerText.toLowerCase().includes(category.toLowerCase())) {} else {
-
-            newTargets.push(element);
-        }
-    }
-    for (let index = 0; index < newTargets.length; ++index) {
-        let x = newTargets[index].parentElement.parentElement.parentElement.parentElement.parentElement;
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
-    }
-}

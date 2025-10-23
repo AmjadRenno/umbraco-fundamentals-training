@@ -1,0 +1,21 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = "master.cshtml";
+}
+<section class="container py-4">
+    <h1>@Model.Value("eventsTitle")</h1>
+    <p>@Model.Value("eventsBody")</p>
+
+    <ul>
+        @foreach (var eventItem in Model.Children)
+        {
+            <li>
+                <a href="@eventItem.Url()">
+                    @eventItem.Value("eventTitle")
+                </a>
+                <span> - @eventItem.Value("eventDate")</span>
+            </li>
+        }
+    </ul>
+</section>

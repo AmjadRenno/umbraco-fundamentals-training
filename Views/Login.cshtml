@@ -1,0 +1,26 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Web.Website.Controllers
+@using Umbraco.Cms.Web.Common.Security
+@inject MemberSignInManager signInManager
+
+@{
+    Layout = "master.cshtml";
+}
+
+<div class="container py-5">
+    <h2>Login Page</h2>
+
+    @if (User?.Identity?.IsAuthenticated ?? false)
+    {
+        <p>Welcome @User.Identity.Name 👋</p>
+
+        @using (Html.BeginUmbracoForm<UmbLoginStatusController>("HandleLogout"))
+        {
+            <button type="submit" class="btn btn-danger">Logout</button>
+        }
+    }
+    else
+    {
+        @Html.Partial("loginform")
+    }
+</div>
